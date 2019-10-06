@@ -3,11 +3,13 @@ package com.sr.sorting;
 import com.sr.utils.InputUtil;
 import java.util.Arrays;
 
+/**
+ * MergeSort works by halving the arrays and doing a recursive sort on
+ * individual array elements and merging them
+ */
 public class MergeSort {
     public static void main(String[] args) {
         int[] arr = InputUtil.getIntArray();
-        //int[] arr = {14,7,3,12,9,11,6,2,2,2};
-        //int[] arr = {8, 7, 9, 7, 6, 0};
         System.out.println(Arrays.toString(arr));
         sort(arr, new Integer[arr.length],0, arr.length-1);
         System.out.println(Arrays.toString(arr));
@@ -26,34 +28,32 @@ public class MergeSort {
     }
     
     public static void merge(int[] arr, Integer[] temp, int start, int mid, int end) {
-
-        if(start == mid) {
-            if(arr[start] > arr[end]) {
-                InputUtil.swapInts(arr, start, end);
-            }
-            return;
-        }
-
         int rtStart=mid+1;
         int i=start, k=start, j = rtStart;
+
+        //traverse from start of left half until the start of the right half
+        //compare each element in both halves and add the elements
+        //in sort order in temp array
         while(i < rtStart) {
-            if(j < end+1) {
+            if(j <= end) {
                 if(arr[i] < arr[j]) {
                     temp[k++] = arr[i++];
                 } else {
                     temp[k++] = arr[j++];
                 }
             } else {
+                //adds remaining left half elements to temp
                 temp[k++] = arr[i++];
             }
         }
 
-        while(j < end+1) {
+        //add any remaining right half elements to temp
+        while(j <= end) {
             temp[k++] = arr[j++];
         }
         System.out.println(Arrays.toString(temp));
         i=k=start;
-        while( i < end+1) {
+        while( i <= end) {
             arr[i++]=temp[k++];
         }
     }
