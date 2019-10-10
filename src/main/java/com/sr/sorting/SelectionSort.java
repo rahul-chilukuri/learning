@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class SelectionSort {
     public static void main(String[] args) {
         int[] arr = InputUtil.getIntArray();
-        System.out.println(Arrays.toString(arr));
+        InputUtil.print(arr);
 
         for(int i = 0 ; i < arr.length-1;i++) {
             int min = i;
@@ -25,6 +25,6 @@ public class SelectionSort {
             }
         }
 
-        System.out.println(Arrays.toString(arr));
+        InputUtil.print(arr);
     }
 }

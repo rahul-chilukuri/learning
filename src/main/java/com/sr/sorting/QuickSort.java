@@ -14,9 +14,9 @@ import java.util.Arrays;
 public class QuickSort {
     public static void main(String[] args) {
         int[] arr = InputUtil.getIntArray();
-        System.out.println(Arrays.toString(arr));
+        InputUtil.print(arr);
         quickSort(arr,0, arr.length-1);
-        System.out.println(Arrays.toString(arr));
+        InputUtil.print(arr);
     }
 
     public static void quickSort(int[] arr, int left, int right) {

@@ -1,14 +1,21 @@
 package com.sr.utils;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputUtil {
     private static final Scanner scanner = new Scanner(System.in);
+
     public static int[] getIntArray() {
+
         int n= (int) (20*Math.random());
         if(n < 3) {
             n+=n*2+n%3;
         }
+        return getIntArray(n);
+    }
+
+    public static int[] getIntArray(int n) {
         int[] c = new int[n];
         for (int i = 0; i < n; i++) {
             int cItem = (int) (10*Math.random()+n%2);
@@ -26,5 +33,13 @@ public class InputUtil {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+    }
+
+    public static void print(int[] arr) {
+        print(Arrays.toString(arr));
+    }
+
+    public static void print(String str) {
+        System.out.println(str);
     }
 }

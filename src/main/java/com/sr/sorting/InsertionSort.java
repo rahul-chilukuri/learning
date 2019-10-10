@@ -12,18 +12,18 @@ import java.util.Arrays;
 public class InsertionSort {
     public static void main(String[] args) {
         int[] arr = InputUtil.getIntArray();
-        System.out.println(Arrays.toString(arr));
+        InputUtil.print(arr);
 
         for(int i=0; i < arr.length-1;i++) {
             for(int j=i+1; j < arr.length; j++) {
                 if( (i < j && arr[j] < arr[i]) || ( i > j && arr[j] > arr[i])) {
                     InputUtil.swapInts(arr, i , j);
-                    System.out.println(Arrays.toString(arr));
+                    InputUtil.print(arr);
                 }
             }
         }
 
-        System.out.println(Arrays.toString(arr));
+        InputUtil.print(arr);
     }
 
 

@@ -5,14 +5,14 @@ import java.util.Arrays;
 
 /**
  * MergeSort works by halving the arrays and doing a recursive sort on
- * individual array elements and merging them
+ * those halves and merging them
  */
 public class MergeSort {
     public static void main(String[] args) {
         int[] arr = InputUtil.getIntArray();
-        System.out.println(Arrays.toString(arr));
+        InputUtil.print(arr);
         sort(arr, new Integer[arr.length],0, arr.length-1);
-        System.out.println(Arrays.toString(arr));
+        InputUtil.print(arr);
     }
 
     public static void sort(int[] arr, Integer[] temp, int start, int end) {
@@ -51,7 +51,7 @@ public class MergeSort {
         while(j <= end) {
             temp[k++] = arr[j++];
         }
-        System.out.println(Arrays.toString(temp));
+        System.out.println("-----------"+Arrays.toString(temp));
         i=k=start;
         while( i <= end) {
             arr[i++]=temp[k++];
