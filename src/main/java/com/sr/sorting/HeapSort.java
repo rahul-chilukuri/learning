@@ -23,7 +23,7 @@ public class HeapSort {
         int i = n-1;
         while(i>-1) {
             InputUtil.swapInts(arr, 0, i);
-            maxifyHeap(arr, 0, --i);
+            heapify(arr, 0, --i, true);
         }
     }
 
@@ -34,21 +34,12 @@ public class HeapSort {
         int i = n-1;
         while(i>-1) {
             InputUtil.swapInts(arr, 0, i);
-            minifyHeap(arr, 0, --i);
+            heapify(arr, 0, --i, false);
         }
     }
 
-    private static void maxifyHeap(int[] arr, int p, int end) {
-        heapify(arr, p, end, true);
-    }
-
-    private static void minifyHeap(int[] arr, int p, int end) {
-        heapify(arr, p, end, false);
-    }
-
     private static void heapify(int[] arr, int p, int end, boolean maxify) {
-        int lc;
-        lc = leftChildIndex(p);
+        int lc = leftChildIndex(p);
 
         if(lc > end) {
             return;
