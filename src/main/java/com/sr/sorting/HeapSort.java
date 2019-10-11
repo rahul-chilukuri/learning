@@ -46,26 +46,22 @@ public class HeapSort {
         }
 
         int rc = rightChildIndex(p), parent = arr[p], leftChild = arr[lc];
-        int rightChild, swapCandidate;
+        int rightChild, swapChild;
         boolean needSwap;
         if(maxify) {
             rightChild = rc > end? Integer.MIN_VALUE: arr[rc];
-            swapCandidate= Math.max(leftChild, rightChild);
-            needSwap = swapCandidate > parent;
+            swapChild= Math.max(leftChild, rightChild);
+            needSwap = swapChild > parent;
         } else {
             rightChild = rc > end? Integer.MAX_VALUE: arr[rc];
-            swapCandidate= Math.min(leftChild, rightChild);
-            needSwap = swapCandidate < parent;
+            swapChild= Math.min(leftChild, rightChild);
+            needSwap = swapChild < parent;
         }
 
         if(needSwap) {
-            if(swapCandidate == leftChild) {
-                InputUtil.swapInts(arr, lc, p);
-                heapify(arr, lc, end, maxify);
-            } else {
-                InputUtil.swapInts(arr, rc, p);
-                heapify(arr, rc, end, maxify);
-            }
+            int swapIndex = swapChild == leftChild ? lc: rc;
+            InputUtil.swapInts(arr, swapIndex, p);
+            heapify(arr, swapIndex, end, maxify);
         }
     }
 
