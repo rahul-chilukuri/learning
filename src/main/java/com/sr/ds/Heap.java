@@ -4,7 +4,8 @@ import com.sr.utils.InputUtil;
 
 public class Heap {
     public static void main(String[] args) {
-        int[] arr = InputUtil.getIntArray(31);
+        int n = InputUtil.getRandomInt(25);
+        int[] arr = InputUtil.getIntArray(n);
         InputUtil.print(arr);
         int swch = (int) Math.round(Math.random());
         if(swch == 0) {
@@ -17,7 +18,7 @@ public class Heap {
 
     public static void minHeap(int[] arr) {
         InputUtil.print("Min Heap");
-        heapify(arr, false);
+        buildHeap(arr, false);
         if (isMinHeap(arr, 0)) {
             System.out.println("Yes");
         }
@@ -25,32 +26,35 @@ public class Heap {
 
     public static void maxHeap(int[] arr) {
         InputUtil.print("Max Heap");
-        heapify(arr, true);
+        for(int i = 1; i < arr.length;i++) {
+            buildHeap(arr, true);
+        }
         if (isMaxHeap(arr, arr.length)) {
             System.out.println("Yes");
         }
     }
 
-    private static void heapify(int[] arr, boolean maxify) {
-        int p, j;
+    private static void buildHeap(int[] arr, boolean maxify) {
         for(int i = 1; i < arr.length;i++) {
-            j = i;
-            p = parent(j);
-            while(p >=0) {
-                boolean cond = maxify ? arr[j] > arr[p]: arr[j] < arr[p];
-                if(cond) {
-                    InputUtil.swapInts(arr, j, p);
-                    j = p;
-                    p = parent(p);
-                }  else {
-                    break;
-                }
-            }
+            heapify(arr, i, maxify);
         }
-
     }
 
-    private static int parent(int pos) {
+    private static void heapify(int[] arr, int pos, boolean maxify) {
+        int parent = getParent(pos);
+        while(parent >=0) {
+            boolean isSwapRequired = maxify ? arr[pos] > arr[parent]: arr[pos] < arr[parent];
+            if(isSwapRequired) {
+                InputUtil.swapInts(arr, pos, parent);
+                pos = parent;
+                parent = getParent(parent);
+            }  else {
+                break;
+            }
+        }
+    }
+
+    private static int getParent(int pos) {
         if (pos > 0) {
             return pos % 2 == 0 ? (pos - 1) / 2 : pos / 2;
         } else {
@@ -66,6 +70,7 @@ public class Heap {
         return (2 * pos) + 1;
     }
 
+    /**************************     Not my impl from here           ****************************/
     static boolean isMaxHeap(int arr[], int n) {
         // Start from root and go till the last internal
         // node

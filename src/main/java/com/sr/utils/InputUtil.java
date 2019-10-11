@@ -8,7 +8,7 @@ public class InputUtil {
 
     public static int[] getIntArray() {
 
-        int n= (int) (20*Math.random());
+        int n= getRandomInt(10);
         if(n < 3) {
             n+=n*2+n%3;
         }
