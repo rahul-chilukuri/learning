@@ -4,7 +4,7 @@ import com.sr.utils.InputUtil;
 
 public class Heap {
     public static void main(String[] args) {
-        int n = InputUtil.getRandomInt(25);
+        int n = InputUtil.getRandomInt(15);
         int[] arr = InputUtil.getIntArray(n);
         InputUtil.print(arr);
         int swch = (int) Math.round(Math.random());
@@ -18,7 +18,9 @@ public class Heap {
 
     public static void minHeap(int[] arr) {
         InputUtil.print("Min Heap");
-        buildHeap(arr, false);
+        for(int i = 1; i < arr.length;i++) {
+            buildHeap(arr, i, false);
+        }
         if (isMinHeap(arr, 0)) {
             System.out.println("Yes");
         }
@@ -27,17 +29,15 @@ public class Heap {
     public static void maxHeap(int[] arr) {
         InputUtil.print("Max Heap");
         for(int i = 1; i < arr.length;i++) {
-            buildHeap(arr, true);
+            buildHeap(arr, i, true);
         }
         if (isMaxHeap(arr, arr.length)) {
             System.out.println("Yes");
         }
     }
 
-    private static void buildHeap(int[] arr, boolean maxify) {
-        for(int i = 1; i < arr.length;i++) {
-            heapify(arr, i, maxify);
-        }
+    private static void buildHeap(int[] arr, int i, boolean maxify) {
+        heapify(arr, i, maxify);
     }
 
     private static void heapify(int[] arr, int pos, boolean maxify) {
@@ -60,14 +60,6 @@ public class Heap {
         } else {
             return -1;
         }
-    }
-
-    private static int leftChild(int pos) {
-        return (2 * pos);
-    }
-
-    private static int rightChild(int pos) {
-        return (2 * pos) + 1;
     }
 
     /**************************     Not my impl from here           ****************************/
