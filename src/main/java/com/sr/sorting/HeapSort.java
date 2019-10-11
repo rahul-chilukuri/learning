@@ -18,12 +18,12 @@ public class HeapSort {
 
     private static void sortAsc(int[] arr) {
         int n = arr.length;
-
         Heap.maxHeap(arr);
+
         int i = n-1;
         while(i>-1) {
             InputUtil.swapInts(arr, 0, i);
-            heapify(arr, 0, --i, true);
+            maxifyHeap(arr, 0, --i);
         }
     }
 
@@ -34,22 +34,28 @@ public class HeapSort {
         int i = n-1;
         while(i>-1) {
             InputUtil.swapInts(arr, 0, i);
-            heapify(arr, 0, --i, false);
+            minifyHeap(arr, 0, --i);
         }
     }
 
+    private static void maxifyHeap(int[] arr, int p, int end) {
+        heapify(arr, p, end, true);
+    }
+
+    private static void minifyHeap(int[] arr, int p, int end) {
+        heapify(arr, p, end, false);
+    }
+
     private static void heapify(int[] arr, int p, int end, boolean maxify) {
-        int lc, rc, parent, leftChild, rightChild;
-        lc = leftChild(p);
+        int lc;
+        lc = leftChildIndex(p);
 
         if(lc > end) {
             return;
         }
 
-        rc = rightChild(p);
-        parent = arr[p];
-        leftChild = arr[lc];
-        int swapCandidate;
+        int rc = rightChildIndex(p), parent = arr[p], leftChild = arr[lc];
+        int rightChild, swapCandidate;
         boolean needSwap;
         if(maxify) {
             rightChild = rc > end? Integer.MIN_VALUE: arr[rc];
@@ -72,11 +78,11 @@ public class HeapSort {
         }
     }
 
-    public static int leftChild(int pos) {
+    public static int leftChildIndex(int pos) {
         return (2 * pos)+1;
     }
 
-    public static int rightChild(int pos) {
+    public static int rightChildIndex(int pos) {
         return 2 * (pos + 1);
     }
 }
