@@ -17,22 +17,23 @@ public class Heap {
     }
 
     public static void minHeap(int[] arr) {
-        InputUtil.print("Min Heap");
         for(int i = 1; i < arr.length;i++) {
             buildHeap(arr, i, false);
         }
         if (isMinHeap(arr, 0)) {
-            System.out.println("Yes");
+            System.out.print("Min Heap -\tYes -\t");
+            InputUtil.print(arr);
         }
     }
 
     public static void maxHeap(int[] arr) {
-        InputUtil.print("Max Heap");
         for(int i = 1; i < arr.length;i++) {
             buildHeap(arr, i, true);
         }
         if (isMaxHeap(arr, arr.length)) {
-            System.out.println("Yes");
+            System.out.print("Max Heap -\tYes -\t");
+            InputUtil.print(arr);
+
         }
     }
 
@@ -56,7 +57,8 @@ public class Heap {
 
     private static int getParent(int pos) {
         if (pos > 0) {
-            return pos % 2 == 0 ? (pos - 1) / 2 : pos / 2;
+            //return pos % 2 == 0 ? (pos - 1) / 2 : pos / 2;
+            return (pos - 1) / 2 ;
         } else {
             return -1;
         }

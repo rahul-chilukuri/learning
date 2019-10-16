@@ -5,14 +5,13 @@ import com.sr.utils.InputUtil;
 
 public class HeapSort {
     public static void main(String[] args) {
-        int[] arr = InputUtil.getIntArray(15);
+        int[] arr = InputUtil.getIntArray(31);
         InputUtil.print(arr);
         if(Math.round(Math.random()) > 0) {
             sortDesc(arr);
         } else {
             sortAsc(arr);
         }
-
         InputUtil.print(arr);
     }
 

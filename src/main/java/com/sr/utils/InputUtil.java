@@ -35,6 +35,10 @@ public class InputUtil {
         arr[j] = temp;
     }
 
+    public static void print(String message, int[] arr) {
+        print(message+" - "+Arrays.toString(arr));
+    }
+
     public static void print(int[] arr) {
         print(Arrays.toString(arr));
     }
