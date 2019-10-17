@@ -1,6 +1,6 @@
 package com.sr.sorting;
 
-import com.sr.ds.Heap;
+import com.sr.ds.heap.HeapArrImpl;
 import com.sr.utils.InputUtil;
 
 public class HeapSort {
@@ -17,7 +17,7 @@ public class HeapSort {
 
     private static void sortAsc(int[] arr) {
         int n = arr.length;
-        Heap.maxHeap(arr);
+        HeapArrImpl.maxHeap(arr);
 
         int i = n-1;
         while(i>-1) {
@@ -28,7 +28,7 @@ public class HeapSort {
 
     private static void sortDesc(int[] arr) {
         int n = arr.length;
-        Heap.minHeap(arr);
+        HeapArrImpl.minHeap(arr);
 
         int i = n-1;
         while(i>-1) {

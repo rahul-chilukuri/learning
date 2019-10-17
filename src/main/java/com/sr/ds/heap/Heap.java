@@ -1,12 +1,21 @@
-package com.sr.ds;
+package com.sr.ds.heap;
 
 import com.sr.utils.InputUtil;
 import java.util.Arrays;
 
-public class MinHeap {
+public class Heap {
     private int capacity = 10;
     private int size = 0;
     int[] items = new int[capacity];
+    private boolean isMaxHeap;
+
+    Heap(boolean isMaxHeap) {
+        this.isMaxHeap = isMaxHeap;
+    }
+
+    private boolean isMaxHeap() {
+        return this.isMaxHeap;
+    }
 
     public int getParentIndex(int index) {
         return (index-1)/2;
@@ -59,7 +68,7 @@ public class MinHeap {
     public void siftUp() {
         int idx = size - 1;
         int pIdx = getParentIndex(idx);
-        while(pIdx > -1 && items[idx]<items[pIdx]) {
+        while(pIdx > -1 && isMaxHeap()?items[idx]>items[pIdx]: items[idx]<items[pIdx]) {
             InputUtil.swapInts(items, idx, pIdx);
             idx = pIdx;
             pIdx = getParentIndex(pIdx);
@@ -67,6 +76,7 @@ public class MinHeap {
     }
 
     public void siftDown() {
+        boolean isMax = isMaxHeap();
         int idx = 0;
         while(hasLeftChild(idx)) {
             int lIdx = getLeftChildIndex(idx);
@@ -74,43 +84,49 @@ public class MinHeap {
             int sIdx;
 
             int lc = items[lIdx];
-            int rc = rIdx < size? items[rIdx]:Integer.MAX_VALUE;
-            int sc = Math.min(lc, rc);
+            int rc = isMax? rIdx < size? items[rIdx]:Integer.MIN_VALUE  :rIdx < size? items[rIdx]:Integer.MAX_VALUE;
+            int sc = isMax? Math.max(lc,rc):Math.min(lc, rc);
 
-            if(sc < items[idx]) {
+
+            if(isMax? sc> items[idx]: sc < items[idx]) {
                 sIdx = sc == lc? lIdx:rIdx;
                 InputUtil.swapInts(items, sIdx, idx);
+                idx = sIdx;
             } else {
                 break;
             }
-
-            idx = sIdx;
         }
+
         /*
         int[] arr= Arrays.copyOf(items,size);
-        if (Heap.isMinHeap(arr, 0)) {
-            InputUtil.print("Min Heap -\tYes", arr);
+        if (HeapArrImpl.isMinHeap(arr, 0)) {
+            InputUtil.print("Min HeapArrImpl -\tYes", arr);
+        } else if (HeapArrImpl.isMaxHeap(arr, size)) {
+            InputUtil.print("Max HeapArrImpl -\tYes", arr);
         }
         */
     }
 
     public static void main(String[] args) {
-        MinHeap minHeap  = new MinHeap();
-        int[] arr = InputUtil.getIntArray(15);
-        InputUtil.print(arr);
+        boolean isMaxHeap = Math.round(Math.random()) == 0 ? false:true;
+        Heap heap = new Heap(isMaxHeap);
+
+        int arrLength = 15;
+        int[] arr = InputUtil.getIntArray(arrLength);
+        InputUtil.print("Input Arr",arr);
         for(int i : arr) {
-            minHeap.add(i);
+            heap.add(i);
         }
 
-        InputUtil.print("min heap",Arrays.copyOf(minHeap.items,minHeap.size));
+        InputUtil.print(isMaxHeap? "Max Heap ":"Min Heap ",Arrays.copyOf(heap.items, heap.size));
 
-        //removing k min elements from min heap
-        int len = 10;
-        int[] minElements = new int[len];
+        //removing k elements from heap
+        int len = (int) Math.round(arrLength*(Math.random()));
+        int[] removed = new int[len];
         for(int j= 0; j< len;j++) {
-            minElements[j] = minHeap.poll();
+            removed[j] = heap.poll();
         }
 
-        InputUtil.print("min elements",minElements);
+        InputUtil.print("Removed "+len+" elements",removed);
     }
 }

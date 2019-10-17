@@ -1,8 +1,8 @@
-package com.sr.ds;
+package com.sr.ds.heap;
 
 import com.sr.utils.InputUtil;
 
-public class Heap {
+public class HeapArrImpl {
     public static void main(String[] args) {
         int n = InputUtil.getRandomInt(15);
         int[] arr = InputUtil.getIntArray(n);
@@ -21,7 +21,7 @@ public class Heap {
             buildHeap(arr, i, false);
         }
         if (isMinHeap(arr, 0)) {
-            System.out.print("Min Heap -\tYes -\t");
+            System.out.print("Min HeapArrImpl -\tYes -\t");
             InputUtil.print(arr);
         }
     }
@@ -31,7 +31,7 @@ public class Heap {
             buildHeap(arr, i, true);
         }
         if (isMaxHeap(arr, arr.length)) {
-            System.out.print("Max Heap -\tYes -\t");
+            System.out.print("Max HeapArrImpl -\tYes -\t");
             InputUtil.print(arr);
 
         }
