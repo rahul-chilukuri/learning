@@ -2,8 +2,6 @@ package com.sr.sorting;
 
 import com.sr.utils.InputUtil;
 
-import java.util.Arrays;
-
 /**
  * Elements to the left are to be assumed sorted
  * if elements on the right are less than any of the

@@ -2,8 +2,6 @@ package com.sr.sorting;
 
 import com.sr.utils.InputUtil;
 
-import java.util.Arrays;
-
 /**
  * Sort based on pivot
  * all elements to the right of pivot are greater than pivot

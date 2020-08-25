@@ -2,8 +2,6 @@ package com.sr.sorting;
 
 import com.sr.utils.InputUtil;
 
-import java.util.Arrays;
-
 /**
  * Get minimum element on each pass and put in it's place
  */

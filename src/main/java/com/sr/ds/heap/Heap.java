@@ -1,6 +1,7 @@
 package com.sr.ds.heap;
 
 import com.sr.utils.InputUtil;
+
 import java.util.Arrays;
 
 public class Heap {
@@ -86,7 +87,6 @@ public class Heap {
             int lc = items[lIdx];
             int rc = isMax? rIdx < size? items[rIdx]:Integer.MIN_VALUE  :rIdx < size? items[rIdx]:Integer.MAX_VALUE;
             int sc = isMax? Math.max(lc,rc):Math.min(lc, rc);
-
 
             if(isMax? sc> items[idx]: sc < items[idx]) {
                 sIdx = sc == lc? lIdx:rIdx;
