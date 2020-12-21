@@ -46,7 +46,7 @@ public class LongestSubstring {
         return Math.max(count, max);
     }
 
-    // similar but shorted implementation to substrA
+    // similar implementation to substrB
     public static int substrB(String s) {
         int n = s.length(), ans = 0;
         int[] index = new int[128]; // current index of character
