@@ -1,12 +1,11 @@
 package com.sr.ds.list;
 
-public class DoubleLinkedList extends LinkedList {
+public class DoubleLinkedList extends List {
 
     public void insertAtStart(int x) {
-        Node newNode = new Node(x);
+        Node newNode = new Node(x, head);
 
         if (head != null) {
-            newNode.next = head;
             head.prev = newNode;
         }
         head = newNode;
@@ -60,9 +59,8 @@ public class DoubleLinkedList extends LinkedList {
             node = node.next;
         }
 
-        Node newNode = new Node(x);
+        Node newNode = new Node(node, x);
         node.next = newNode;
-        newNode.prev = node;
     }
 
     public void remove(int value) {
@@ -106,12 +104,12 @@ public class DoubleLinkedList extends LinkedList {
     }
 
     public void print() {
-        this.print(head, "<->");
+        this.print("<->");
     }
 
     public static void main(String[] args) {
         /* Start with the empty list */
-        LinkedList list = new DoubleLinkedList();
+        List list = new DoubleLinkedList();
 
         // Insert 6. So linked list becomes 6<->null
         list.insertAtEnd(6);

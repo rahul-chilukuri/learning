@@ -7,7 +7,7 @@ public class InputUtil {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void sysout(Object r) {
-        System.out.println("r => " + r);
+        System.out.println(r);
     }
 
     public static void sysexit() {
