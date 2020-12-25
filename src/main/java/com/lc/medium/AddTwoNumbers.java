@@ -15,7 +15,6 @@ public class AddTwoNumbers extends DefaultList {
         printNode(sumNode);
 
         // most significant bit appearing at the front of the list
-        // l1 = getListNode(new int[] { 1, 2, 4, 3 });
         l1 = getListNode(new int[] { 5, 6, 3 });
         l2 = getListNode(new int[] { 9, 9, 8, 4, 2 });
 
@@ -63,6 +62,15 @@ public class AddTwoNumbers extends DefaultList {
         return head;
     }
 
+    static Node checkAndSetHeadNodeForCarryOver(Node head) {
+        int carry = head.data / 10;
+        if (carry > 0) {
+            head.data %= 10;
+            head = new Node(carry, head);
+        }
+        return head;
+    }
+
     static Node addTwoNumbers(Node n1, Node n2) {
         int s1 = getSize(n1);
         int s2 = getSize(n2);
@@ -79,20 +87,19 @@ public class AddTwoNumbers extends DefaultList {
         }
 
         Node sameSizeSumNode = addSameSizeNodes(bNode, sNode);
-        Node sumNode = addCarry(bigHead, sameSizeSumNode, diff);
+        Node sumNode = propagateCarry(bigHead, sameSizeSumNode, diff);
         assert sumNode != null;
 
         // check if head digit is greater than 10
-        int carry = sumNode.data / 10;
-        if (carry > 0) {
-            sumNode.data %= 10;
-            sumNode = new Node(carry, sumNode);
-        }
-        return sumNode;
+        return checkAndSetHeadNodeForCarryOver(sumNode);
     }
 
     static Node addSameSizeNodes(Node l1, Node l2) {
         Node node = null;
+
+        //checking for null on either nodes is redundant
+        //check on one should be enough since they are
+        //of same size, but retaining those checks to be clear
         if (l1.next == null && l2.next == null) {
             node = new Node(l1.data + l2.data);
         } else {
@@ -106,23 +113,21 @@ public class AddTwoNumbers extends DefaultList {
         return node;
     }
 
-    static Node addCarry(Node bigNode, Node sameSizeSumNode, int diff) {
+    static Node propagateCarry(Node bigNode, Node sameSizeSumNode, int diff) {
         assert diff > -1;
-        Node node = null;
         int carry;
         if (diff == 0) {
-            node = sameSizeSumNode;
+            return sameSizeSumNode;
         } else if (diff == 1) {
             carry = sameSizeSumNode.data / 10;
             sameSizeSumNode.data %= 10;
-            node = new Node(carry + bigNode.data, sameSizeSumNode);
+            return new Node(carry + bigNode.data, sameSizeSumNode);
         } else {
-            node = addCarry(bigNode.next, sameSizeSumNode, --diff);
+            Node node = propagateCarry(bigNode.next, sameSizeSumNode, --diff);
             carry = node.data / 10;
             node.data %= 10;
-            node = new Node(carry + bigNode.data, node);
+            return new Node(carry + bigNode.data, node);
         }
-        return node;
     }
 
     static Node addTwoNumbersByPrependingZeroes(Node l1, Node l2) {
@@ -146,12 +151,7 @@ public class AddTwoNumbers extends DefaultList {
         assert sumNode != null;
 
         // check if head digit is greater than 10
-        int carry = sumNode.data / 10;
-        if (carry > 0) {
-            sumNode.data %= 10;
-            sumNode = new Node(carry, sumNode);
-        }
-        return sumNode;
+        return checkAndSetHeadNodeForCarryOver(sumNode);
     }
 
     static Node addTwoNumbersInReversedOrder(Node l1, Node l2) {
