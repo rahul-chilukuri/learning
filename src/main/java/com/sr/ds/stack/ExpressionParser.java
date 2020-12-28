@@ -34,6 +34,23 @@ public class ExpressionParser {
         }
     }
 
+    static Integer operate(int o1, int o2, char operator) {
+        switch (operator) {
+            case '+':
+                return o1 + o2;
+            case '-':
+                return o1 - o2;
+            case '*':
+                return o1 * o2;
+            case '/':
+                return o1 / o2;
+            case '^':
+                return (int) Math.pow(o1, o2);
+            default:
+                return null;
+        }
+    }
+
     public static String infixToPostfix(String expr) {
         assert expr != null;
         StringBuilder builder = new StringBuilder("");
@@ -44,7 +61,7 @@ public class ExpressionParser {
             } else if (chr == '(') {
                 stack.push(chr);
             } else if (chr == ')') {
-                while (!(stack.isEmpty() || stack.peek() == '(')) {
+                while (!stack.isEmpty() && stack.peek() != '(') {
                     builder.append(stack.pop());
                 }
                 stack.pop();
@@ -86,6 +103,7 @@ public class ExpressionParser {
             if (Character.isDigit(chr)) {
                 stack.push(Character.getNumericValue(chr));
             } else {
+                //first one that comes out is the second operand
                 int o1 = stack.pop();
                 int o2 = stack.pop();
                 stack.push(operate(o2, o1, chr));
@@ -102,26 +120,10 @@ public class ExpressionParser {
             if (Character.isDigit(chr)) {
                 stack.push(Character.getNumericValue(chr));
             } else {
+                // first one that comes out is the second operand
                 stack.push(operate(stack.pop(), stack.pop(), chr));
             }
         }
         return stack.pop();
-    }
-
-    static Integer operate(int o1, int o2, Character operator) {
-        switch (operator) {
-            case '+':
-                return o1 + o2;
-            case '-':
-                return o1 - o2;
-            case '*':
-                return o1 * o2;
-            case '/':
-                return o1 / o2;
-            case '^':
-                return (int) Math.pow(o1, o2);
-            default:
-                return null;
-        }
     }
 }

@@ -22,6 +22,32 @@ public abstract class List {
 
     abstract void reverse();
 
+    void printCircular() {
+        printCircular(head, "-◙-");
+    }
+
+    void printCircular(Node node, String separator) {
+        assert node != null;
+        StringBuilder builder = new StringBuilder("");
+
+        do {
+            builder.append(node.data).append(separator);
+            node = node.next;
+        } while (!head.equals(node));
+        builder.append(head.data);
+
+        // while (node != null) {
+        // builder.append(node.data).append(separator);
+        // if (node.next == head) {
+        // builder.append(head.data);
+        // break;
+        // }
+        // node = node.next;
+        // }
+
+        System.out.println("\nLinked list \n" + builder);
+    }
+
     void print(String separator) {
         print(head, separator);
     }
