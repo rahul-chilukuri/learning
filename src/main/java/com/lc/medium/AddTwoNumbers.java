@@ -1,7 +1,7 @@
 package com.lc.medium;
 
 import com.sr.ds.list.DefaultList;
-import com.sr.ds.list.Node;
+import com.sr.ds.nodes.Node;
 
 public class AddTwoNumbers extends DefaultList {
 

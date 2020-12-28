@@ -1,6 +1,6 @@
 package com.sr.ds.queue;
 
-import com.sr.ds.list.Node;
+import com.sr.ds.nodes.Node;
 
 public class QueueAsLinkedList {
     Node front;

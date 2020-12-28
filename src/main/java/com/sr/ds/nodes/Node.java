@@ -1,4 +1,4 @@
-package com.sr.ds.list;
+package com.sr.ds.nodes;
 
 public class Node {
     public int data;

@@ -1,5 +1,6 @@
 package com.sr.ds.list;
 
+import com.sr.ds.nodes.Node;
 public class LinkedList extends List {
 
     public void insertAtStart(int x) {

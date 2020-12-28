@@ -1,5 +1,7 @@
 package com.sr.ds.list;
 
+import com.sr.ds.nodes.Node;
+
 public class CircularLinkedList extends List {
 
     void insertAtStart(int x) {
