@@ -23,6 +23,18 @@ public abstract class List {
 
     abstract void reverse();
 
+    Node getLinkedList(int[] arr) {
+        Node head = new Node();
+        Node node = head;
+        Node temp;
+        for (int i : arr) {
+            temp = new Node(i);
+            temp.next = node;
+            node = temp;
+        }
+        return head.next;
+    }
+
     void printCircular() {
         printCircular(head, "-◙-");
     }
@@ -36,16 +48,6 @@ public abstract class List {
             node = node.next;
         } while (!head.equals(node));
         builder.append(head.data);
-
-        // while (node != null) {
-        // builder.append(node.data).append(separator);
-        // if (node.next == head) {
-        // builder.append(head.data);
-        // break;
-        // }
-        // node = node.next;
-        // }
-
         System.out.println("\nLinked list \n" + builder);
     }
 
@@ -92,48 +94,107 @@ public abstract class List {
     }
 
     boolean isLoop() {
-        return getLoopInNode(head) == null ? false : true;
+        return getLoopInNode() != null ? true : false;
     }
 
-    Node getLoopInNode(Node head) {
-        Node slow = head;
+    Node getLoopInNode() {
         Node fast = head;
-
-        while (fast != null && fast.next != null) {
-            fast = fast.next.next;
-            slow = slow.next;
-
-            if (fast == slow) {
-                sysout(fast.data);
-                return fast;
+        Node slow = head;
+        do {
+            if (fast == null || fast.next == null) {
+                return null;
             }
-        }
-        return null;
+            slow = slow.next;
+            fast = fast.next.next;
+        } while (slow != fast);
+        return slow;
     }
 
     void detectAndRemoveLoop() {
-        removeLoop(getLoopInNode(head));
-    }
-
-    void removeLoop(Node loop) {
+        Node loop = getLoopInNode();
         if (loop == null) {
             return;
         }
 
+        sysout("Loop node is " + loop.data);
+
         Node l1 = head;
-        Node l2 = loop;
 
-        while (true) {
-            while (l2.next != loop && l2.next != head) {
-                l2 = l2.next;
-            }
-
-            if (l2.next == l1) {
-                break;
-            }
-
+        // l1 at head and l2 at loop node
+        // if they move 1 step at a time,
+        // they will eventually meet at start of cycle
+        while (l1.next != loop.next) {
             l1 = l1.next;
+            loop = loop.next;
         }
-        l2.next = null;
+
+        loop.next = null;
+    }
+
+    Node getFirstNodeInCycle() {
+        Node s = head, f = head;
+        do {
+            if (f == null || f.next == null) {
+                return null;
+            } else {
+                f = f.next.next;
+                s = s.next;
+            }
+        } while (s != f);
+
+        s = head;
+        while (s != f) {
+            s = s.next;
+            f = f.next;
+        }
+        return s;
+    }
+
+    Node getFirstIntersectionNode(Node h1, Node h2) {
+        Node n1 = h1;
+        Node n2 = h2;
+
+        while (n1 != n2) {
+            n1 = n1 == null ? n2 : n1.next;
+            n2 = n2 == null ? n1 : n2.next;
+        }
+        return n1;
+    }
+
+    /*
+     * Constraints on this linked list: not a loop. n <= size of the list
+     */
+    Node removeNthNodeFromEnd(Node head, int n) {
+        if (n < 1 || head == null) {
+            return head;
+        }
+
+        // n cannot be greater than the size of the list
+        // so can increment n2 until n > 1 as n2 is already at head
+        // To get nth node from last, set a node(n2) at n distance from beginning
+        // have another node(n1) start from head and move both n1 and n2 simultaenously
+        // When n2 is at last node, n1 is the nth node from end.
+        Node n2 = head;
+        while (n-- > 1) {
+            n2 = n2.next;
+        }
+
+        // end of list reached and intended
+        // node to be removed is the first one
+        if (n2.next == null) {
+            return head.next;
+        } else {
+
+            //else traverse n2 until the next element is null
+            Node prev, n1 = head;
+            do {
+                prev = n1;
+                n1 = n1.next;
+                n2 = n2.next;
+            } while (n2.next != null);
+
+            prev.next = n1.next;
+            return head;
+        }
     }
 }

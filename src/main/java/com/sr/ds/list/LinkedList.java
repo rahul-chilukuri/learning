@@ -1,6 +1,7 @@
 package com.sr.ds.list;
 
 import com.sr.ds.nodes.Node;
+
 public class LinkedList extends List {
 
     public void insertAtStart(int x) {
@@ -137,17 +138,22 @@ public class LinkedList extends List {
         list.print();
         list.printMiddle();
 
+        // Removing 5th node from end changes this to 13->6->8->9->1->null
+        list.print(list.removeNthNodeFromEnd(list.head, 5), "->");
+
+        // loop tests
         List loopList = new LinkedList();
         for (int i = 1; i < 6; i++) {
             loopList.insertAtEnd(i);
         }
+        loopList.print();
         System.out.println("isLoop =>" + loopList.isLoop());
-        list.print();
         loopList.head.next.next.next.next.next = loopList.head.next;
-        System.out.println("isLoop =>" + loopList.isLoop());
+        Node loop = loopList.getFirstNodeInCycle();
+        System.out.println("getFirstNodeInCycle() => " + (loop == null ? "NULL" : loop.data));
         loopList.detectAndRemoveLoop();
-        System.out.println("isLoop =>" + loopList.isLoop());
-        list.print();
 
+        System.out.println("isLoop =>" + loopList.isLoop());
+        loopList.print();
     }
 }
