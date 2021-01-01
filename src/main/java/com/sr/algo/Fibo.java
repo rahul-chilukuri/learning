@@ -9,14 +9,14 @@ public class Fibo {
         int n = InputUtil.getRandomInt(20);
         System.out.println(" n  ==> "+n);
 
-        //it = iterative(n);
-        //System.out.println("it  ==> "+it);
+        it = iterative(n);
+        System.out.println("it  ==> "+it);
 
-        //rc = recursive(n);
-        //System.out.println("rc  ==> "+rc);
+        rc = recursive(n);
+        System.out.println("rc  ==> "+rc);
 
-        //rcm = recursiveM(n);
-        //System.out.println("rcm ==> "+rcm);
+        rcm = recursiveM(n);
+        System.out.println("rcm ==> "+rcm);
 
         printFibSeries(n);
         //System.out.println("Total number of calls "+numberOfCalls);

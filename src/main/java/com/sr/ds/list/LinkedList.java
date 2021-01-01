@@ -76,7 +76,7 @@ public class LinkedList extends DefaultList {
         head = dummy.next;
     }
 
-    void reverse() {
+    public void reverse() {
         Node next, prev = null, current = head;
         while (current != null) {
             next = current.next;
@@ -91,25 +91,6 @@ public class LinkedList extends DefaultList {
         /* Start with the empty list */
         List list = new LinkedList();
 
-        // list will be 1->9->8->6->4->13->null
-        testBasics(list);
-
-        // Removing 5th node from end changes this to 13->6->8->9->1->null
-        testRemoveNthNode(list);
-
-        // list is not modified
-        testRemoveAll(list);
-
-        // loop tests
-        testLoop();
-
-        testOddEvenList(list);
-
-        testPalindrome(list);
-    }
-
-    static void testBasics(List list) {
-        System.out.println("################ TEST BASICS ################");
         // Insert 6. So linked list becomes 6->null
         list.insertAtEnd(6);
 
@@ -156,52 +137,5 @@ public class LinkedList extends DefaultList {
         // Reverse 13->4->6->8->9->1->null
         list.reverse();
         list.print();
-    }
-
-    static void testRemoveNthNode(List list) {
-        System.out.println("################ REMOVE Nth from HEAD ################");
-        list.print(list.removeNthNodeFromEnd(list.head, 5), "->");
-    }
-
-    static void testRemoveAll(List list) {
-        System.out.println("################ REMOVE ALL ################");
-        Node dHead = list.getLinkedList(new int[] { 1, 2, 6, 3, 4, 5, 6 });
-        // Node dHead = List.getLinkedList(new int[] { 6, 6, 6, 6, 6, 6, 6 });
-        list.print(list.removeAll(dHead, 6), "->");
-    }
-
-    static void testLoop() {
-        System.out.println("################ TEST LOOP ################");
-        List loopList = new LinkedList();
-        for (int i = 1; i < 6; i++) {
-            loopList.insertAtEnd(i);
-        }
-        loopList.print();
-        System.out.println("isLoop =>" + loopList.isLoop());
-        loopList.head.next.next.next.next.next = loopList.head.next;
-        Node loop = loopList.getFirstNodeInCycle();
-        System.out.println("getFirstNodeInCycle() => " + (loop == null ? "NULL" : loop.data));
-        loopList.detectAndRemoveLoop();
-
-        System.out.println("isLoop =>" + loopList.isLoop());
-        loopList.print();
-    }
-
-    static void testOddEvenList(List list) {
-        // Node head = list.getLinkedList(new int[] { 1, 2, 3, 4, 5 });
-        // Node head = list.getLinkedList(new int[] { 2, 1, 3, 5, 6, 4, 7 });
-        Node head = list.getLinkedList(new int[] { 1, 2, 3, 4, 5, 6, 7 });
-        list.print(list.oddEvenList(head), "->");
-    }
-
-    static void testPalindrome(List list) {
-        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] {})));
-        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1 })));
-        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 1 })));
-        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 2 })));
-        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 3, 1, 1 })));
-        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 1, 3, 1 })));
-        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 2, 2, 1 })));
-        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 2, 3, 2, 1 })));
     }
 }

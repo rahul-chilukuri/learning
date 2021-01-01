@@ -4,7 +4,7 @@ import com.sr.ds.nodes.Node;
 
 public class CircularLinkedList extends DefaultList {
 
-    void insertAtStart(int x) {
+    public void insertAtStart(int x) {
         Node first = new Node(x, head);
         if (first.next == null) {
             first.next = first;
@@ -14,7 +14,7 @@ public class CircularLinkedList extends DefaultList {
         head = first;
     }
 
-    void insertBefore(int value, int x) {
+    public void insertBefore(int value, int x) {
         assert head != null;
         if (head.data == value) {
             insertAtStart(x);
@@ -33,7 +33,7 @@ public class CircularLinkedList extends DefaultList {
         } while (node != head);
     }
 
-    void insertAfter(int value, int x) {
+    public void insertAfter(int value, int x) {
         assert head != null;
         Node node = head;
         do {
@@ -47,7 +47,7 @@ public class CircularLinkedList extends DefaultList {
         } while (node != head);
     }
 
-    void insertAtEnd(int x) {
+    public void insertAtEnd(int x) {
         if (head == null) {
             insertAtStart(x);
             return;
@@ -60,7 +60,7 @@ public class CircularLinkedList extends DefaultList {
         node.next = new Node(x, head);
     }
 
-    void removeFirst() {
+    public void removeFirst() {
         Node node = head;
         Node first = node.next;
         while (node.next != head) {
@@ -70,7 +70,7 @@ public class CircularLinkedList extends DefaultList {
         head = first;
     }
 
-    void remove(int x) {
+    public void remove(int x) {
         assert head != null;
         if (head.data == x) {
             removeFirst();
@@ -87,7 +87,7 @@ public class CircularLinkedList extends DefaultList {
         }
     }
 
-    void reverse() {
+    public void reverse() {
         assert head != null;
         Node next, prev = null, current = head;
 
@@ -110,11 +110,27 @@ public class CircularLinkedList extends DefaultList {
         node.next = currentHead;
     }
 
-    void print() {
+    public void print() {
         printCircular();
     }
 
-    void print(String separator) {
+    public void printCircular() {
+        printCircular(head, "-◙-");
+    }
+
+    public void printCircular(Node node, String separator) {
+        assert node != null;
+        StringBuilder builder = new StringBuilder("");
+
+        do {
+            builder.append(node.data).append(separator);
+            node = node.next;
+        } while (!head.equals(node));
+        builder.append(head.data);
+        System.out.println("\nLinked list \n" + builder);
+    }
+
+    public void print(String separator) {
         assert head != null;
         Node node = head;
         StringBuilder builder = new StringBuilder("");

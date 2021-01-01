@@ -1,6 +1,7 @@
 package com.sr.ds.list;
 
 import com.sr.ds.nodes.Node;
+
 public class DoubleLinkedList extends DefaultList {
 
     public void insertAtStart(int x) {
@@ -88,7 +89,7 @@ public class DoubleLinkedList extends DefaultList {
         }
     }
 
-    void reverse() {
+    public void reverse() {
         Node prev = null, next, current = head;
         while (current != null) {
             prev = current.prev;

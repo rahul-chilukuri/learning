@@ -7,51 +7,39 @@ public abstract class List {
     // Even though Node has prev,
     // for single linked list it will not be set
     // head of the list
-    Node head;
+    public Node head;
 
-    abstract void insertAtStart(int x);
+    public abstract void insertAtStart(int x);
 
-    abstract void insertBefore(int value, int x);
+    public abstract void insertBefore(int value, int x);
 
-    abstract void insertAfter(int value, int x);
+    public abstract void insertAfter(int value, int x);
 
-    abstract void insertAtEnd(int x);
+    public abstract void insertAtEnd(int x);
 
-    abstract void remove(int x);
+    public abstract void remove(int x);
 
-    abstract void print();
+    public abstract void print();
 
-    abstract void reverse();
+    public abstract void reverse();
 
-    abstract Node getLinkedList(int[] arr);
-
-    abstract Node removeAll(Node node, int value);
-
-    abstract Node oddEvenList(Node node);
-
-    abstract boolean isPalindrome(Node node);
-
-    void printCircular() {
-        printCircular(head, "-◙-");
+    public static Node getLinkedList(int[] arr) {
+        Node dummy = new Node();
+        Node node = dummy;
+        Node temp;
+        for (int i : arr) {
+            temp = new Node(i);
+            node.next = temp;
+            node = temp;
+        }
+        return dummy.next;
     }
 
-    void printCircular(Node node, String separator) {
-        assert node != null;
-        StringBuilder builder = new StringBuilder("");
-
-        do {
-            builder.append(node.data).append(separator);
-            node = node.next;
-        } while (!head.equals(node));
-        builder.append(head.data);
-        System.out.println("\nLinked list \n" + builder);
-    }
-
-    void print(String separator) {
+    public void print(String separator) {
         print(head, separator);
     }
 
-    void print(Node head, String separator) {
+    public static void print(Node head, String separator) {
         Node node = head;
         StringBuilder builder = new StringBuilder("");
         while (node != null) {
@@ -62,7 +50,7 @@ public abstract class List {
         System.out.println("\nLinked list \n" + builder);
     }
 
-    void printMiddle() {
+    public void printMiddle() {
         assert head != null;
         Node slow = head;
         Node fast = slow.next;
@@ -86,111 +74,6 @@ public abstract class List {
                     oneXCount, oneXCount + 1));
         } else {
             sysout(String.format("\nMiddle element(s) are %d with position %d", slow.data, oneXCount));
-        }
-    }
-
-    boolean isLoop() {
-        return getLoopInNode() != null ? true : false;
-    }
-
-    Node getLoopInNode() {
-        Node fast = head;
-        Node slow = head;
-        do {
-            if (fast == null || fast.next == null) {
-                return null;
-            }
-            slow = slow.next;
-            fast = fast.next.next;
-        } while (slow != fast);
-        return slow;
-    }
-
-    void detectAndRemoveLoop() {
-        Node loop = getLoopInNode();
-        if (loop == null) {
-            return;
-        }
-
-        sysout("Loop node is " + loop.data);
-
-        Node l1 = head;
-
-        // l1 at head and l2 at loop node
-        // if they move 1 step at a time,
-        // they will eventually meet at start of cycle
-        while (l1.next != loop.next) {
-            l1 = l1.next;
-            loop = loop.next;
-        }
-
-        loop.next = null;
-    }
-
-    Node getFirstNodeInCycle() {
-        Node s = head, f = head;
-        do {
-            if (f == null || f.next == null) {
-                return null;
-            } else {
-                f = f.next.next;
-                s = s.next;
-            }
-        } while (s != f);
-
-        s = head;
-        while (s != f) {
-            s = s.next;
-            f = f.next;
-        }
-        return s;
-    }
-
-    Node getFirstIntersectionNode(Node h1, Node h2) {
-        Node n1 = h1;
-        Node n2 = h2;
-
-        while (n1 != n2) {
-            n1 = n1 == null ? n2 : n1.next;
-            n2 = n2 == null ? n1 : n2.next;
-        }
-        return n1;
-    }
-
-    /*
-     * Constraints on this linked list: not a loop. n <= size of the list
-     */
-    Node removeNthNodeFromEnd(Node head, int n) {
-        if (n < 1 || head == null) {
-            return head;
-        }
-
-        // n cannot be greater than the size of the list
-        // so can increment n2 until n > 1 as n2 is already at head
-        // To get nth node from last, set a node(n2) at n distance from beginning
-        // have another node(n1) start from head and move both n1 and n2 simultaenously
-        // When n2 is at last node, n1 is the nth node from end.
-        Node n2 = head;
-        while (n-- > 1) {
-            n2 = n2.next;
-        }
-
-        // end of list reached and intended
-        // node to be removed is the first one
-        if (n2.next == null) {
-            return head.next;
-        } else {
-
-            // else traverse n2 until the next element is null
-            Node prev, n1 = head;
-            do {
-                prev = n1;
-                n1 = n1.next;
-                n2 = n2.next;
-            } while (n2.next != null);
-
-            prev.next = n1.next;
-            return head;
         }
     }
 }
