@@ -68,39 +68,32 @@ public class DefaultList extends List {
     }
 
     boolean isPalindrome(Node head) {
-        if (head == null)
-            return true;
+        Node slow = head, fast = head, prev = null, temp;
 
-        Node h1 = head, temp = new Node(-1,head), h2 = temp;
+        // splitting this head list into two
+        // one starts at the middle
+        // the other one starts at middle and points backward
+        while (fast != null) {
+            if (fast.next == null) {
+                slow = slow.next;
+                break;
+            }
 
-        // set h2 to middle node
-        while (temp != null && temp.next != null) {
-            h2 = h2.next;
-            temp = temp.next.next;
+            fast = fast.next.next;
+            temp = slow.next;
+            slow.next = prev;
+            prev = slow;
+            slow = temp;
         }
 
-        // if only one element, consider it a palindrome
-        if (h2 == null)
-            return true;
-
-        // reverse h2
-        Node next, prev = null;
-        temp = h2.next == null ? h2 : h2.next;
-        while (temp != null) {
-            next = temp.next;
-            temp.next = prev;
-            prev = temp;
-            temp = next;
-        }
-        h2 = prev;
-
-        while (h2 != null && h1 != null) {
-            if (h1.data != h2.data) {
+        while (slow != null && prev != null) {
+            if (slow.data != prev.data) {
                 return false;
             }
-            h1 = h1.next;
-            h2 = h2.next;
+            slow = slow.next;
+            prev = prev.next;
         }
-        return true;
+
+        return slow == null && prev == null;
     }
 }
