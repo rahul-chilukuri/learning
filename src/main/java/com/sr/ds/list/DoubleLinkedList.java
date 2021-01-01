@@ -1,7 +1,7 @@
 package com.sr.ds.list;
 
 import com.sr.ds.nodes.Node;
-public class DoubleLinkedList extends List {
+public class DoubleLinkedList extends DefaultList {
 
     public void insertAtStart(int x) {
         Node newNode = new Node(x, head);

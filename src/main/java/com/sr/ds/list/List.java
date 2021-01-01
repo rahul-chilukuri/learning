@@ -23,17 +23,13 @@ public abstract class List {
 
     abstract void reverse();
 
-    Node getLinkedList(int[] arr) {
-        Node head = new Node();
-        Node node = head;
-        Node temp;
-        for (int i : arr) {
-            temp = new Node(i);
-            temp.next = node;
-            node = temp;
-        }
-        return head.next;
-    }
+    abstract Node getLinkedList(int[] arr);
+
+    abstract Node removeAll(Node node, int value);
+
+    abstract Node oddEvenList(Node node);
+
+    abstract boolean isPalindrome(Node node);
 
     void printCircular() {
         printCircular(head, "-◙-");
@@ -185,7 +181,7 @@ public abstract class List {
             return head.next;
         } else {
 
-            //else traverse n2 until the next element is null
+            // else traverse n2 until the next element is null
             Node prev, n1 = head;
             do {
                 prev = n1;

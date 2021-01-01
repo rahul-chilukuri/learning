@@ -2,7 +2,7 @@ package com.sr.ds.list;
 
 import com.sr.ds.nodes.Node;
 
-public class CircularLinkedList extends List {
+public class CircularLinkedList extends DefaultList {
 
     void insertAtStart(int x) {
         Node first = new Node(x, head);

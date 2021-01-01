@@ -2,7 +2,7 @@ package com.sr.ds.list;
 
 import com.sr.ds.nodes.Node;
 
-public class LinkedList extends List {
+public class LinkedList extends DefaultList {
 
     public void insertAtStart(int x) {
         Node firstNode = new Node(x, head);
@@ -61,20 +61,19 @@ public class LinkedList extends List {
     }
 
     public void remove(int value) {
-        Node node = head;
-        if (node.data == value) {
-            head = node.next;
-            return;
-        }
+        Node dummy = new Node(-1, head);
+        Node next, node = dummy;
 
         while (node.next != null) {
-            Node next = node.next;
+            next = node.next;
             if (next.data == value) {
                 node.next = next.next;
                 break;
             }
             node = node.next;
         }
+
+        head = dummy.next;
     }
 
     void reverse() {
@@ -92,6 +91,25 @@ public class LinkedList extends List {
         /* Start with the empty list */
         List list = new LinkedList();
 
+        // list will be 1->9->8->6->4->13->null
+        testBasics(list);
+
+        // Removing 5th node from end changes this to 13->6->8->9->1->null
+        testRemoveNthNode(list);
+
+        // list is not modified
+        testRemoveAll(list);
+
+        // loop tests
+        testLoop();
+
+        testOddEvenList(list);
+
+        testPalindrome(list);
+    }
+
+    static void testBasics(List list) {
+        System.out.println("################ TEST BASICS ################");
         // Insert 6. So linked list becomes 6->null
         list.insertAtEnd(6);
 
@@ -128,20 +146,32 @@ public class LinkedList extends List {
         // 1->9->8->6->4->13->10->null
         list.remove(12);
 
-        // Remove 12. So linked list becomes
+        // Remove 10. So linked list becomes
         // 1->9->8->6->4->13->null
         list.remove(10);
         list.print();
 
+        list.printMiddle();
+
         // Reverse 13->4->6->8->9->1->null
         list.reverse();
         list.print();
-        list.printMiddle();
+    }
 
-        // Removing 5th node from end changes this to 13->6->8->9->1->null
+    static void testRemoveNthNode(List list) {
+        System.out.println("################ REMOVE Nth from HEAD ################");
         list.print(list.removeNthNodeFromEnd(list.head, 5), "->");
+    }
 
-        // loop tests
+    static void testRemoveAll(List list) {
+        System.out.println("################ REMOVE ALL ################");
+        Node dHead = list.getLinkedList(new int[] { 1, 2, 6, 3, 4, 5, 6 });
+        // Node dHead = List.getLinkedList(new int[] { 6, 6, 6, 6, 6, 6, 6 });
+        list.print(list.removeAll(dHead, 6), "->");
+    }
+
+    static void testLoop() {
+        System.out.println("################ TEST LOOP ################");
         List loopList = new LinkedList();
         for (int i = 1; i < 6; i++) {
             loopList.insertAtEnd(i);
@@ -155,5 +185,23 @@ public class LinkedList extends List {
 
         System.out.println("isLoop =>" + loopList.isLoop());
         loopList.print();
+    }
+
+    static void testOddEvenList(List list) {
+        // Node head = list.getLinkedList(new int[] { 1, 2, 3, 4, 5 });
+        // Node head = list.getLinkedList(new int[] { 2, 1, 3, 5, 6, 4, 7 });
+        Node head = list.getLinkedList(new int[] { 1, 2, 3, 4, 5, 6, 7 });
+        list.print(list.oddEvenList(head), "->");
+    }
+
+    static void testPalindrome(List list) {
+        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] {})));
+        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1 })));
+        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 1 })));
+        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 2 })));
+        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 3, 1, 1 })));
+        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 1, 3, 1 })));
+        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 2, 2, 1 })));
+        System.out.println("is list palindrome " + list.isPalindrome(list.getLinkedList(new int[] { 1, 2, 3, 2, 1 })));
     }
 }
