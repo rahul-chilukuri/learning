@@ -19,9 +19,9 @@ public abstract class List {
 
     public abstract void remove(int x);
 
-    public abstract void print();
-
     public abstract void reverse();
+
+    public abstract void print();
 
     public static Node getLinkedList(int[] arr) {
         Node dummy = new Node();
@@ -35,11 +35,15 @@ public abstract class List {
         return dummy.next;
     }
 
+    public static void print(Node head) {
+        print(head, "->");
+    }
+
     public void print(String separator) {
         print(head, separator);
     }
 
-    public static void print(Node head, String separator) {
+    private static void print(Node head, String separator) {
         Node node = head;
         StringBuilder builder = new StringBuilder("");
         while (node != null) {

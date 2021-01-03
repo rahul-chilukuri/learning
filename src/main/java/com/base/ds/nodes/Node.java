@@ -4,6 +4,7 @@ public class Node {
     public int data;
     public Node next;
     public Node prev;
+    public Node child;
 
     public Node() {
     }
@@ -26,5 +27,12 @@ public class Node {
         this.prev = prev;
         data = d;
         this.next = next;
+    }
+
+    public Node(Node prev, int d, Node next, Node child) {
+        this.prev = prev;
+        data = d;
+        this.next = next;
+        this.child = child;
     }
 }
