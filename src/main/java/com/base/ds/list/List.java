@@ -35,6 +35,18 @@ public abstract class List {
         return dummy.next;
     }
 
+    public static Node getDoubleLinkedList(int[] arr) {
+        Node dummy = new Node();
+        Node node = dummy;
+        Node temp;
+        for (int i : arr) {
+            temp = new Node(node, i);
+            node.next = temp;
+            node = temp;
+        }
+        return dummy.next;
+    }
+
     public static void print(Node head) {
         print(head, "->");
     }

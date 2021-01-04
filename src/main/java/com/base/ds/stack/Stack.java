@@ -6,7 +6,7 @@ public class Stack<T> {
     static final int MAX_SIZE = 100;
     Object[] array = new Object[MAX_SIZE];
 
-    Stack() {
+    public Stack() {
         top = -1;
     }
 
