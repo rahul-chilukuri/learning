@@ -17,7 +17,7 @@ public class DoubleLinkedList extends DefaultList {
         assert head != null;
         Node node = head;
         while (node != null) {
-            if (node.data == value) {
+            if (node.val == value) {
                 Node next = node.next;
 
                 Node newNode = new Node(node, x, next);
@@ -34,7 +34,7 @@ public class DoubleLinkedList extends DefaultList {
         Node node = head;
 
         while (node != null) {
-            if (node.data == value) {
+            if (node.val == value) {
                 Node prev = node.prev;
                 Node newNode = new Node(prev, x, node);
 
@@ -69,7 +69,7 @@ public class DoubleLinkedList extends DefaultList {
         Node node = head;
 
         while (node != null) {
-            if (node.data == value) {
+            if (node.val == value) {
                 Node prev = node.prev;
                 Node next = node.next;
 

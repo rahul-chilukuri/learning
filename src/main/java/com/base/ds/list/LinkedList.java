@@ -13,7 +13,7 @@ public class LinkedList extends DefaultList {
         assert head != null;
         Node node = head;
         while (node != null) {
-            if (node.data == value) {
+            if (node.val == value) {
                 Node newNode = new Node(x, node.next);
                 node.next = newNode;
                 break;
@@ -27,7 +27,7 @@ public class LinkedList extends DefaultList {
         Node newNode = null;
 
         Node node = head;
-        if (node.data == value) {
+        if (node.val == value) {
             newNode = new Node(x, node);
             head = newNode;
             return;
@@ -35,7 +35,7 @@ public class LinkedList extends DefaultList {
 
         while (node.next != null) {
             Node next = node.next;
-            if (next.data == value) {
+            if (next.val == value) {
                 newNode = new Node(x, next);
                 node.next = newNode;
                 break;
@@ -66,7 +66,7 @@ public class LinkedList extends DefaultList {
 
         while (node.next != null) {
             next = node.next;
-            if (next.data == value) {
+            if (next.val == value) {
                 node.next = next.next;
                 break;
             }

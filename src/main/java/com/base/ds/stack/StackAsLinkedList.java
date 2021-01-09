@@ -25,7 +25,7 @@ public class StackAsLinkedList {
         } else {
             Node poppedNode = head;
             head = head.next;
-            return poppedNode.data;
+            return poppedNode.val;
         }
     }
 
@@ -34,7 +34,7 @@ public class StackAsLinkedList {
             System.out.println("Stack underflow");
             return Integer.MIN_VALUE;
         } else {
-            return head.data;
+            return head.val;
         }
     }
 

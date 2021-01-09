@@ -23,6 +23,19 @@ public abstract class List {
 
     public abstract void print();
 
+    public static Node getCircularLinkedList(int[] arr) {
+        Node dummy = new Node();
+        Node node = dummy;
+        Node temp;
+        for (int i : arr) {
+            temp = new Node(i);
+            node.next = temp;
+            node = temp;
+        }
+        node.next = dummy.next;
+        return dummy.next;
+    }
+
     public static Node getLinkedList(int[] arr) {
         Node dummy = new Node();
         Node node = dummy;
@@ -55,11 +68,35 @@ public abstract class List {
         print(head, separator);
     }
 
+    public static void printCircular(Node head) {
+        Node node = head;
+        assert node != null;
+        StringBuilder builder = new StringBuilder("");
+        do {
+            builder.append(node.val).append("=>");
+            node = node.next;
+        } while (!head.equals(node));
+        builder.append(head.val);
+        System.out.println("\nLinked list \n" + builder);
+    }
+
+    public void printCircular(Node node, String separator) {
+        assert node != null;
+        StringBuilder builder = new StringBuilder("");
+
+        do {
+            builder.append(node.val).append(separator);
+            node = node.next;
+        } while (!head.equals(node));
+        builder.append(head.val);
+        System.out.println("\nLinked list \n" + builder);
+    }
+
     private static void print(Node head, String separator) {
         Node node = head;
         StringBuilder builder = new StringBuilder("");
         while (node != null) {
-            builder.append(node.data).append(separator);
+            builder.append(node.val).append(separator);
             node = node.next;
         }
         builder.append("null");
@@ -86,10 +123,10 @@ public abstract class List {
         }
 
         if (totalCount % 2 == 0) {
-            sysout(String.format("\nMiddle element(s) are %d,%d with position %d & %d", slow.data, slow.next.data,
+            sysout(String.format("\nMiddle element(s) are %d,%d with position %d & %d", slow.val, slow.next.val,
                     oneXCount, oneXCount + 1));
         } else {
-            sysout(String.format("\nMiddle element(s) are %d with position %d", slow.data, oneXCount));
+            sysout(String.format("\nMiddle element(s) are %d with position %d", slow.val, oneXCount));
         }
     }
 }

@@ -16,7 +16,7 @@ public class CircularLinkedList extends DefaultList {
 
     public void insertBefore(int value, int x) {
         assert head != null;
-        if (head.data == value) {
+        if (head.val == value) {
             insertAtStart(x);
             return;
         }
@@ -24,7 +24,7 @@ public class CircularLinkedList extends DefaultList {
         Node next, node = head;
         do {
             next = node.next;
-            if (next.data == value) {
+            if (next.val == value) {
                 Node temp = new Node(x, next);
                 node.next = temp;
                 break;
@@ -37,7 +37,7 @@ public class CircularLinkedList extends DefaultList {
         assert head != null;
         Node node = head;
         do {
-            if (node.data == value) {
+            if (node.val == value) {
                 Node next = node.next;
                 Node temp = new Node(x, next);
                 node.next = temp;
@@ -72,14 +72,14 @@ public class CircularLinkedList extends DefaultList {
 
     public void remove(int x) {
         assert head != null;
-        if (head.data == x) {
+        if (head.val == x) {
             removeFirst();
             return;
         }
         Node node = head;
         while (node.next != head) {
             Node next = node.next;
-            if (next.data == x) {
+            if (next.val == x) {
                 node.next = next.next;
                 break;
             }
@@ -118,28 +118,16 @@ public class CircularLinkedList extends DefaultList {
         printCircular(head, "-◙-");
     }
 
-    public void printCircular(Node node, String separator) {
-        assert node != null;
-        StringBuilder builder = new StringBuilder("");
-
-        do {
-            builder.append(node.data).append(separator);
-            node = node.next;
-        } while (!head.equals(node));
-        builder.append(head.data);
-        System.out.println("\nLinked list \n" + builder);
-    }
-
     public void print(String separator) {
         assert head != null;
         Node node = head;
         StringBuilder builder = new StringBuilder("");
 
         do {
-            builder.append(node.data).append(separator);
+            builder.append(node.val).append(separator);
             node = node.next;
         } while (!head.equals(node));
-        builder.append(head.data);
+        builder.append(head.val);
 
         // while (node != null) {
         // builder.append(node.data).append(separator);

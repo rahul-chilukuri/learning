@@ -32,7 +32,7 @@ public class QueueAsLinkedList {
             } else {
                 front = front.next;
             }
-            return temp.data;
+            return temp.val;
         }
     }
 
@@ -41,7 +41,7 @@ public class QueueAsLinkedList {
         Node node = front;
         StringBuilder builder = new StringBuilder("");
         while (node != null) {
-            builder.append(node.data).append("->");
+            builder.append(node.val).append("->");
             node = node.next;
         }
         builder.append("null");

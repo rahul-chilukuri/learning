@@ -32,7 +32,7 @@ public class CircularQueue {
                 front = front.next;
                 rear.next = front;
             }
-            return temp.data;
+            return temp.val;
         }
     }
 
@@ -42,12 +42,12 @@ public class CircularQueue {
         StringBuilder builder = new StringBuilder("");
         Node next;
         do {
-            builder.append(node.data).append("->");
+            builder.append(node.val).append("->");
             next = node.next;
             node = next;
         } while (next != front);
 
-        builder.append(front.data);
+        builder.append(front.val);
         System.out.println("Queue " + builder);
     }
 
