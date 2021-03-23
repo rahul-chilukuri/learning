@@ -33,7 +33,6 @@ public class HeapArrImpl {
         if (isMaxHeap(arr, arr.length)) {
             System.out.print("Max HeapArrImpl -\tYes -\t");
             InputUtil.print(arr);
-
         }
     }
 

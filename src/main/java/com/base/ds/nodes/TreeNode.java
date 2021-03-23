@@ -1,33 +1,34 @@
 package com.base.ds.nodes;
 
-public class TreeNode {
-    int val;
-    TreeNode left, right;
+public class TreeNode<T> {
+    public T val;
+    public TreeNode<T> left, right;
 
-    TreeNode(int data) {
-        this.val = data;
-        left = right = null;
+    public TreeNode(T data) {
+        this.val = (T) data;
+        left = null;
+        right = null;
     }
 
-    TreeNode(TreeNode left, int data) {
+    public TreeNode(TreeNode<T> left, T data) {
         this.left = left;
         this.val = data;
         this.right = null;
     }
 
-    TreeNode(int data, TreeNode right) {
+    public TreeNode(T data, TreeNode<T> right) {
         this.left = null;
         this.val = data;
         this.right = right;
     }
 
-    TreeNode(TreeNode left, int data, TreeNode right) {
+    public TreeNode(TreeNode<T> left, T data, TreeNode<T> right) {
         this.val = data;
         this.left = left;
         this.right = right;
     }
 
-    boolean isLeaf() {
+    public boolean isLeaf() {
         return this.left == null && this.right == null;
     }
 }

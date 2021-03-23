@@ -1,6 +1,10 @@
 package com.base.ds.list;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 import com.base.ds.nodes.Node;
+import com.base.utils.InputUtil;
 
 public class LinkedList extends DefaultList {
 
@@ -87,6 +91,61 @@ public class LinkedList extends DefaultList {
         head = prev;
     }
 
+    public static void printReverse(Node node) {
+        if (node.next != null) {
+            printReverse(node.next);
+        }
+        System.out.print(node.val + "->");
+    }
+
+    public static void printReversed(Node node) {
+        System.out.println("");
+        int size = getSize(node);
+        int block = (int) Math.ceil(Math.sqrt(size));
+        Deque<Node> blockStack = new ArrayDeque<Node>();
+        StringBuilder builder = new StringBuilder("");
+
+        // put start of each block into stack
+        int counter = 0;
+        while (node != null) {
+            if (counter % block == 0) {
+                blockStack.push(node);
+            }
+            node = node.next;
+            counter++;
+        }
+
+        Node start = null, end, temp;
+        Deque<Integer> stackValues = new ArrayDeque<>();
+        while (!blockStack.isEmpty()) {
+            end = start;
+            start = blockStack.pop();
+            temp = start;
+
+            while (start != end) {
+                stackValues.push(start.val);
+                start = start.next;
+            }
+
+            while (!stackValues.isEmpty()) {
+                builder.append(stackValues.pop()).append("->");
+            }
+
+            start = temp;
+        }
+
+        InputUtil.print(builder.toString());
+    }
+
+    private static int getSize(Node node) {
+        int count = 0;
+        while (node != null) {
+            count++;
+            node = node.next;
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         /* Start with the empty list */
         List list = new LinkedList();
@@ -133,6 +192,8 @@ public class LinkedList extends DefaultList {
         list.print();
 
         list.printMiddle();
+        printReverse(list.head);
+        printReversed(list.head);
 
         // Reverse 13->4->6->8->9->1->null
         list.reverse();
